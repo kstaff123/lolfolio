@@ -7,10 +7,6 @@ import rivenicon from "./assets/rivenicon.png";
 import logo from "./assets/logo.png";
 import diamond from "./assets/diamond.png";
 
-document.getElementById("rivenicon").src = rivenicon;
-document.getElementById("logo").src = logo;
-document.getElementById("diamond").src = diamond;
-
 function App() {
   return (
     <div className="bg-background-purple min-h-screen relative overflow-hidden">
@@ -53,7 +49,7 @@ function Header() {
       <div className="flex items-center mx-4 min-w-[300px]">
         <img
           id="logo"
-          src="src/assets/logo.png"
+          src={logo}
           className="size-6 h-7 max-[450px]:size-9 max-[450px]:mr-4 hover:cursor-pointer"
         ></img>
         <h2 className="text-3xl pr-3 max-[450px]:hidden hover:cursor-pointer">
@@ -90,8 +86,7 @@ function ProfileCard() {
       <div className="sm:w-5/6 w-11/12 flex mt-10 items-center justify-center">
         <div className="relative bg-gradient-to-b from-yellow-500 to-yellow-800 sm:min-w-[84px] sm:w-[84px] sm:h-[84px] min-w-[84px] w-[84px] h-[84px] flex justify-center items-center drop-shadow-lg">
           <img
-            id="rivenicon"
-            src="src/assets/rivenicon.png"
+            src={rivenicon}
             className="sm:size-20 sm:min-w-20 size-20 min-h-20"
           ></img>
           <div className="text-white text-xs font-bold absolute px-1 bottom-[80px] sm:bottom-20 border-solid border-2 border-yellow-500 drop-shadow-lg bg-neutral-700">
@@ -157,7 +152,7 @@ function RankedSolo() {
         <div className="flex items-center sm:mt-2 mt-1 sm:mb-4 mb-2">
           <img
             id="diamond"
-            src="/src/assets/diamond.png"
+            src={diamond}
             className=" h-7 sm:h-11 drop-shadow-md pl-1"
           ></img>
           <div className="flex flex-col ml-2 w-full">
