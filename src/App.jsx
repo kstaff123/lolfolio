@@ -2,6 +2,14 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import rivensplashart from "./assets/rivensplashart.jpg";
+import rivenicon from "./assets/rivenicon.png";
+import logo from "./assets/logo.png";
+import diamond from "./assets/diamond.png";
+
+document.getElementById("rivenicon").src = rivenicon;
+document.getElementById("logo").src = logo;
+document.getElementById("diamond").src = diamond;
 
 function App() {
   return (
@@ -20,7 +28,7 @@ function App() {
       linear-gradient(to right, rgba(51, 50, 80, .95), rgba(51, 50, 80, 0)),
       linear-gradient(to bottom, rgba(51, 50, 80, .2), rgba(51, 50, 80, 0)),
       linear-gradient(to left, rgba(51, 50, 80, .95), rgba(51, 50, 80, 0)),
-      url("src/assets/rivensplashart.jpg")`,
+      url("${rivensplashart}")`,
             willChange: "transform",
             imageRendering: "pixelated",
           }}
@@ -44,6 +52,7 @@ function Header() {
     <header className="bg-neutral-700 flex h-20 font-montserrat w-full text-white font-extralight border-none drop-shadow-lg shadow-black">
       <div className="flex items-center mx-4 min-w-[300px]">
         <img
+          id="logo"
           src="src/assets/logo.png"
           className="size-6 h-7 max-[450px]:size-9 max-[450px]:mr-4 hover:cursor-pointer"
         ></img>
@@ -81,6 +90,7 @@ function ProfileCard() {
       <div className="sm:w-5/6 w-11/12 flex mt-10 items-center justify-center">
         <div className="relative bg-gradient-to-b from-yellow-500 to-yellow-800 sm:min-w-[84px] sm:w-[84px] sm:h-[84px] min-w-[84px] w-[84px] h-[84px] flex justify-center items-center drop-shadow-lg">
           <img
+            id="rivenicon"
             src="src/assets/rivenicon.png"
             className="sm:size-20 sm:min-w-20 size-20 min-h-20"
           ></img>
@@ -146,6 +156,7 @@ function RankedSolo() {
         </div>
         <div className="flex items-center sm:mt-2 mt-1 sm:mb-4 mb-2">
           <img
+            id="diamond"
             src="/src/assets/diamond.png"
             className=" h-7 sm:h-11 drop-shadow-md pl-1"
           ></img>
