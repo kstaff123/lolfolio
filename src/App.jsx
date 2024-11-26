@@ -119,13 +119,11 @@ function ProfileCard() {
 
 function Grid() {
   return (
-    <section className="sm:mt-8 mt-2 flex justify-center">
-      <div className="grid xl:grid-cols-12 grid-cols-2  gap-4 xl:w-5/6 w-11/12  text-white ">
+    <section className="sm:mt-8 mt-2 flex justify-center ">
+      <div className="grid xl:grid-cols-12 grid-cols-2  gap-4 xl:w-5/6 w-11/12  text-white auto-rows-fr">
         <RankedSolo />
-
-        <div className="xl:col-span-6 p-4 bg-neutral-700 rounded-xl ">2</div>
-        <div className="xl:col-span-3 p-4 bg-neutral-700 rounded-xl ">3</div>
-        <div></div>
+        <MatchHistory />
+        <RankedSolo />
       </div>
     </section>
   );
@@ -133,8 +131,8 @@ function Grid() {
 
 function RankedSolo() {
   return (
-    <div className="xl:col-span-3 col-span-1 p-1 xl:p-3 bg-neutral-700 rounded-xl drop-shadow-xl">
-      <div className="flex flex-col">
+    <div className="xl:col-span-3 col-span-1 p-1 xl:p-3 bg-neutral-700 rounded-xl drop-shadow-xl h-fit">
+      <div flex flex-col>
         <div className="text-md flex align items-center">
           <div>
             <svg
@@ -173,4 +171,214 @@ function RankedSolo() {
   );
 }
 
+function MatchHistory() {
+  return (
+    <div className="xl:col-span-6 max-[1280px]:hidden col-span-1 py-1 xl:py-3  bg-neutral-700 rounded-xl drop-shadow-xl">
+      <div className="flex flex-col">
+        <div className="text-md flex align items-center px-1 xl:px-3">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 14.707 14.707"
+              fill="#ffffff"
+              stroke="#ffffff"
+              className="w-3 h-4 sm:w-4 sm:h-5"
+            >
+              <rect x="6.275" y="0" width="1.158" height="14.707" />
+            </svg>
+          </div>
+          <h3 className="font-light text-xs sm:text-base">Match History</h3>
+        </div>
+      </div>
+      <div className="flex bg-neutral-600 my-4 justify-between items-center px-4 py-2 drop-shadow-md">
+        <div className="flex items-center">
+          {/** winrate */}
+          <div className="drop-shadow-lg flex justify-center items-center width-50 pr-2 ">
+            <svg
+              class="-rotate-90"
+              viewBox="0 0 50 50"
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+            >
+              {/** Background Circle */}
+              <circle
+                cx="25"
+                cy="25"
+                r="20"
+                fill="none"
+                class="stroke-current text-[#A56B6B]"
+                stroke-width="10"
+              ></circle>
+              {/** Progress Circle */}
+              <circle
+                cx="25"
+                cy="25"
+                r="20"
+                fill="none"
+                class="stroke-current text-[#6B7FFF]"
+                stroke-width="10"
+                stroke-dasharray="62.8 125.6"
+                stroke-dashoffset="0"
+              ></circle>
+            </svg>
+          </div>
+
+          <div className="flex flex-col">
+            <h2 className="font-semibold"> 50% Win Rate</h2>
+            <h3 className="font-light text-xs">last 10 games</h3>
+          </div>
+        </div>
+        <div className="flex items-center flex-col ">
+          <h2 className="font-">2.16 KDA</h2>
+          <div className="flex">
+            <h2 className="pr-1">11.4</h2>
+            <p className="font-[100] text-neutral-400 pr-1">/</p>
+            <h2 className="pr-1">11.4</h2>
+            <p className="font-[100] text-neutral-400 pr-1">/</p>
+            <h2 className="pr-1">11.4</h2>
+          </div>
+        </div>
+        <div className="flex items-center">
+          <img src="src/assets/kindredicon.png" className="size-10"></img>
+          <div className="flex flex-col">
+            <div className=" pl-2 flex text-sm">
+              <h3>50%</h3>
+              <h3 className="pl-1">(5W 5L)</h3>
+            </div>
+            <div className="pl-2 flex text-sm">
+              <div className="flex">
+                <h3>2.16</h3>
+                <h3 className="pl-1">KDA</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Match />
+    </div>
+  );
+}
+function Match() {
+  return (
+    <div className="flex bg-[#323B7B] mx-6 items-center p-3 drop-shadow-md gap-4 flex-shrink-0 justify-between ">
+      <MatchType />
+      <MatchChamp />
+      <MatchKD />
+      <MatchItems />
+      <MatchPlayers />
+    </div>
+  );
+}
+
+function MatchType() {
+  return (
+    <div className="flex flex-col items-center flex-shrink-0">
+      <h2 className="text-sm font-semibold">Ranked Solo</h2>
+      <p className="text-xs font-thin">11/22</p>
+      <div className="flex items-center">
+        <svg
+          width="9"
+          height="5"
+          viewBox="0 0 9 5"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M4.5 0L8.39711 4.5H0.602886L4.5 0Z" fill="#6C7FFF" />
+        </svg>
+        <h1 className="font-semibold pl-1 text-lg leading-[24px]">26 LP</h1>
+      </div>
+      <div className="flex my-1">
+        <h2 className="pr-1 font-bold text-xs text-[#6C7FFF] ">WIN</h2>
+        <p className="font-thin text-xs">30:38</p>
+      </div>
+    </div>
+  );
+}
+
+function MatchChamp() {
+  return (
+    <div className="flex items-center flex-shrink-0">
+      <div className="flex flex-shrink-0">
+        <img
+          src="src/assets/kindredicon.png"
+          className="size-14 rounded-md "
+        ></img>
+        <div className="bg-neutral-800 w-[14px] h-[14px]  absolute top-[70px] text-center rounded-bl-md">
+          <p className="text-[10px] leading-[12px]">16</p>
+        </div>
+        <div className="flex flex-col size-6 gap-[3px] ml-[2px] w-fit">
+          <div className="flex gap-[2px]">
+            <img
+              src="src/assets/flash.png"
+              className="rounded-sm w-[26px] h-[26px]"
+              alt=""
+            />
+            <img
+              src="src/assets/conqueror.png"
+              className="rounded-sm bg-neutral-700 w-[26px] h-[26px]"
+              alt=""
+            />
+          </div>
+          <div className="flex gap-0.5">
+            <img
+              src="src/assets/smite.png"
+              className="rounded-sm w-[26px] h-[26px]"
+              alt=""
+            />
+            <img
+              src="src/assets/domination.png "
+              className="rounded-sm bg-neutral-700 w-[26px] h-[26px]"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MatchKD() {
+  return (
+    <div className="flex flex-col items-center flex-shrink-0 ">
+      <div className="flex items-center  text-lg tracking-tighter flex-shrink-0 ">
+        <div className="flex flex-shrink-0">
+          <h2 className="pr-1">11</h2>
+          <p className="font-[100] text-neutral-400 pr-1">/</p>
+          <h2 className="pr-1">11</h2>
+          <p className="font-[100] text-neutral-400 pr-1">/</p>
+          <h2 className="pr-1">11</h2>
+        </div>
+      </div>
+      <div className="flex  ">
+        <h2 className="pr-1 font-bold text-xs text-[#6C7FFF]   leading-[16px] ">
+          3.86
+        </h2>
+        <p className="font-thin text-xs  leading-[16px] ">KDA</p>
+      </div>
+      <div className="flex items-center  leading-[16px]">
+        <p className="font-thin text-xs leading-[16px]">191 CS (6.2)</p>
+      </div>
+      <div className="flex">
+        <p className="font-thin text-xs leading-[16px]">27 vision</p>
+      </div>
+    </div>
+  );
+}
+
+function MatchItems() {
+  return (
+    <div className="flex flex-shrink-0">
+      <img src="src/assets/items.png" className="min-h-full w-32 "></img>
+    </div>
+  );
+}
+
+function MatchPlayers() {
+  return (
+    <div className="flex flex-shrink-0">
+      <img src="src/assets/players.png" className="min-h-full w-48"></img>
+    </div>
+  );
+}
 export default App;
