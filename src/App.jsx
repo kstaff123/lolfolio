@@ -34,10 +34,16 @@ function App() {
 
       {/* Content */}
       <div className="relative z-[100]">
-        <Header />
-
-        <ProfileCard />
-        <Grid />
+        <div className="max-[1280px]:hidden">
+          <Header />
+          <ProfileCard />
+          <Grid />
+        </div>
+        <div className="min-[1280px]:hidden">
+          <Header />
+          <ProfileCard />
+          <MobileGrid />
+        </div>
       </div>
     </div>
   );
@@ -83,7 +89,7 @@ function Header() {
 function ProfileCard() {
   return (
     <main className="font-montserrat flex justify-center">
-      <div className="sm:w-5/6 w-11/12 flex mt-10 items-center justify-center">
+      <div className="min-[1600px]:w-[1526px] w-11/12 flex mt-10 items-center justify-center">
         <div className="relative bg-gradient-to-b from-yellow-500 to-yellow-800 sm:min-w-[84px] sm:w-[84px] sm:h-[84px] min-w-[84px] w-[84px] h-[84px] flex justify-center items-center drop-shadow-lg">
           <img
             src={rivenicon}
@@ -119,11 +125,23 @@ function ProfileCard() {
 
 function Grid() {
   return (
-    <section className="sm:mt-8 mt-2 flex justify-center ">
-      <div className="grid xl:grid-cols-12 grid-cols-2  gap-4 xl:w-5/6 w-11/12  text-white auto-rows-fr">
+    <section className="sm:mt-8 mt-2 flex justify-center">
+      <div className="grid xl:grid-cols-12 grid-cols-2  gap-4 min-[1600px]:max-w-[1526px] w-11/12  text-white auto-rows-fr ">
         <RankedSolo />
         <MatchHistory />
         <RankedSolo />
+      </div>
+    </section>
+  );
+}
+
+function MobileGrid() {
+  return (
+    <section className="sm:mt-8 mt-2 flex justify-center ">
+      <div className="grid xl:grid-cols-12 grid-cols-2  gap-4 xl:w-5/6 w-11/12  text-white">
+        <RankedSolo />
+        <RankedSolo />
+        <MatchHistory />
       </div>
     </section>
   );
@@ -173,8 +191,8 @@ function RankedSolo() {
 
 function MatchHistory() {
   return (
-    <div className="xl:col-span-6 max-[1280px]:hidden col-span-1 py-1 xl:py-3  bg-neutral-700 rounded-xl drop-shadow-xl">
-      <div className="flex flex-col">
+    <div className="xl:col-span-6 col-span-2 py-1 xl:py-3  bg-neutral-700 rounded-xl drop-shadow-xl min-[1600px]:max-w-[755px]  ">
+      <div className="flex flex-col ">
         <div className="text-md flex align items-center px-1 xl:px-3">
           <div>
             <svg
@@ -261,7 +279,7 @@ function MatchHistory() {
 }
 function Match() {
   return (
-    <div className="flex bg-[#323B7B] mx-6 items-center p-3 drop-shadow-md gap-4 flex-shrink-0 justify-between ">
+    <div className="flex bg-[#323B7B] mx-6 items-center p-3 drop-shadow-md gap-4 flex-shrink-0 justify-between  ">
       <MatchType />
       <MatchChamp />
       <MatchKD />
@@ -376,7 +394,7 @@ function MatchItems() {
 
 function MatchPlayers() {
   return (
-    <div className="flex flex-shrink-0">
+    <div className="flex flex-shrink-0 max-[1600px]:hidden">
       <img src="src/assets/players.png" className="min-h-full w-48"></img>
     </div>
   );
