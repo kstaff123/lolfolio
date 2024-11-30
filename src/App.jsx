@@ -191,7 +191,7 @@ function RankedSolo() {
 
 function MatchHistory() {
   return (
-    <div className="xl:col-span-6 col-span-2 py-1 xl:py-3  bg-neutral-700 rounded-xl drop-shadow-xl min-[1600px]:max-w-[755px]  ">
+    <div className="xl:col-span-6 col-span-2 py-1 xl:py-3  bg-neutral-700 rounded-xl drop-shadow-xl min-[1600px]:max-w-[755px]  mb-10">
       <div className="flex flex-col ">
         <div className="text-md flex align items-center px-1 xl:px-3">
           <div>
@@ -211,13 +211,14 @@ function MatchHistory() {
       <div className="flex bg-neutral-600 my-4 justify-between items-center px-4 py-2 drop-shadow-md">
         <div className="flex items-center">
           {/** winrate */}
-          <div className="drop-shadow-lg flex justify-center items-center width-50 pr-2 ">
+          <div className="drop-shadow-lg flex justify-center items-center max-[640px]:w-[40px] pr-2 ">
             <svg
               class="-rotate-90"
               viewBox="0 0 50 50"
               xmlns="http://www.w3.org/2000/svg"
               width="50"
               height="50"
+              
             >
               {/** Background Circle */}
               <circle
@@ -243,12 +244,12 @@ function MatchHistory() {
           </div>
 
           <div className="flex flex-col">
-            <h2 className="font-semibold"> 50% Win Rate</h2>
-            <h3 className="font-light text-xs">last 10 games</h3>
+            <h2 className="font-semibold sm:text-base text-2xs"> 50% Win Rate</h2>
+            <h3 className="font-light sm:text-xs text-3xs">last 10 games</h3>
           </div>
         </div>
-        <div className="flex items-center flex-col ">
-          <h2 className="font-">2.16 KDA</h2>
+        <div className="flex items-center flex-col sm:text-base text-2xs">
+          <h2 className="font-bold sm:text-base text-2xs">2.16 KDA</h2>
           <div className="flex">
             <h2 className="pr-1">11.4</h2>
             <p className="font-[100] text-neutral-400 pr-1">/</p>
@@ -258,13 +259,13 @@ function MatchHistory() {
           </div>
         </div>
         <div className="flex items-center">
-          <img src="src/assets/kindredicon.png" className="size-10"></img>
-          <div className="flex flex-col">
-            <div className=" pl-2 flex text-sm">
+          <img src="src/assets/kindredicon.png" className="size-6"></img>
+          <div className="flex flex-col ">
+            <div className=" pl-2 flex sm:text-sm text-2xs">
               <h3>50%</h3>
               <h3 className="pl-1">(5W 5L)</h3>
             </div>
-            <div className="pl-2 flex text-sm">
+            <div className="pl-2 flex sm:text-sm text-2xs">
               <div className="flex">
                 <h3>2.16</h3>
                 <h3 className="pl-1">KDA</h3>
@@ -273,13 +274,46 @@ function MatchHistory() {
           </div>
         </div>
       </div>
-      <Match />
+
+      <div className="max-[797px]:hidden">
+        <Match />
+      </div>
+      <div className="min-[797px]:hidden">
+        <MatchNoPlayers />
+      </div>
+
+      <div className="max-[797px]:hidden">
+        <Match />
+      </div>
+      <div className="min-[797px]:hidden">
+        <MatchNoPlayers />
+      </div>
+      <div className="max-[797px]:hidden">
+        <Match />
+      </div>
+      <div className="min-[797px]:hidden">
+        <MatchNoPlayers />
+      </div>
+      <div className="max-[797px]:hidden">
+        <Match />
+      </div>
+      <div className="min-[797px]:hidden">
+        <MatchNoPlayers />
+      </div>
+      <div className="max-[797px]:hidden">
+        <Match />
+      </div>
+      <div className="min-[797px]:hidden">
+        <MatchNoPlayers />
+      </div>
+
+
     </div>
   );
 }
 function Match() {
   return (
-    <div className="flex bg-[#323B7B] mx-6 items-center p-3 drop-shadow-md gap-4 flex-shrink-0 justify-between  ">
+    <div className="flex bg-[#323B7B] sm:mx-6 mx-2 my-2 items-center p-3 drop-shadow-md gap-2 sm:gap-4 text-center justify-between ">
       <MatchType />
       <MatchChamp />
       <MatchKD />
@@ -289,12 +323,24 @@ function Match() {
   );
 }
 
+function MatchNoPlayers() {
+  return (
+    <div className="flex bg-[#323B7B] sm:mx-6 mx-2  my-2 items-center p-3 drop-shadow-md gap-2 sm:gap-4 text-center justify-between ">
+      <MatchType />
+      <MatchChamp />
+      <MatchKD />
+      <MatchItems />
+    </div>
+  );
+}
+
+
 function MatchType() {
   return (
     <div className="flex flex-col items-center flex-shrink-0">
-      <h2 className="text-sm font-semibold">Ranked Solo</h2>
-      <p className="text-xs font-thin">11/22</p>
-      <div className="flex items-center">
+      <h2 className="sm:text-sm font-semibold text-2xs max-[640px]:leading-[12px]">Ranked Solo</h2>
+      <p className="sm:text-xs font-thin text-2xs max-[640px]:leading-[12px]">11/22</p>
+      <div className="flex items-center ">
         <svg
           width="9"
           height="5"
@@ -304,11 +350,11 @@ function MatchType() {
         >
           <path d="M4.5 0L8.39711 4.5H0.602886L4.5 0Z" fill="#6C7FFF" />
         </svg>
-        <h1 className="font-semibold pl-1 text-lg leading-[24px]">26 LP</h1>
+        <h1 className="font-semibold pl-1 sm:text-lg max-[640px]:leading-[12px] text-2xs">26 LP</h1>
       </div>
-      <div className="flex my-1">
-        <h2 className="pr-1 font-bold text-xs text-[#6C7FFF] ">WIN</h2>
-        <p className="font-thin text-xs">30:38</p>
+      <div className="flex sm:my-1">
+        <h2 className="pr-1 font-bold sm:text-xs text-[#6C7FFF] text-2xs  max-[640px]:leading-[12px]">WIN</h2>
+        <p className="font-thin sm:text-xs text-2xs max-[640px]:leading-[12px]">30:38</p>
       </div>
     </div>
   );
@@ -316,51 +362,58 @@ function MatchType() {
 
 function MatchChamp() {
   return (
-    <div className="flex items-center flex-shrink-0">
-      <div className="flex flex-shrink-0">
+    <div className="flex items-center flex-shrink-0 relative">
+      <div className="relative">
+        {/* Kindred Icon */}
         <img
           src="src/assets/kindredicon.png"
-          className="size-14 rounded-md "
-        ></img>
-        <div className="bg-neutral-800 w-[14px] h-[14px]  absolute top-[70px] text-center rounded-bl-md">
-          <p className="text-[10px] leading-[12px]">16</p>
+          className="size-10 sm:size-16 rounded-md relative"
+          alt="Kindred Icon"
+        />
+
+        {/* Level Text */}
+        <div className="bg-neutral-800 sm:w-4 sm:h-4 w-3 h-3 text-center rounded-bl-md flex items-center justify-center absolute bottom-0 left-0">
+          <p className="sm:text-[10px] text-[8px] text-white leading-none">16</p>
         </div>
-        <div className="flex flex-col size-6 gap-[3px] ml-[2px] w-fit">
-          <div className="flex gap-[2px]">
-            <img
-              src="src/assets/flash.png"
-              className="rounded-sm w-[26px] h-[26px]"
-              alt=""
-            />
-            <img
-              src="src/assets/conqueror.png"
-              className="rounded-sm bg-neutral-700 w-[26px] h-[26px]"
-              alt=""
-            />
-          </div>
-          <div className="flex gap-0.5">
-            <img
-              src="src/assets/smite.png"
-              className="rounded-sm w-[26px] h-[26px]"
-              alt=""
-            />
-            <img
-              src="src/assets/domination.png "
-              className="rounded-sm bg-neutral-700 w-[26px] h-[26px]"
-              alt=""
-            />
-          </div>
+      </div>
+
+      {/* Summoner Spells */}
+      <div className="flex flex-col size-6 gap-[3px] ml-[2px] w-fit justify-center">
+        <div className="flex gap-[2px]">
+          <img
+            src="src/assets/flash.png"
+            className="rounded-sm sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
+            alt="Flash"
+          />
+          <img
+            src="src/assets/conqueror.png"
+            className="rounded-sm bg-neutral-700 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
+            alt="Conqueror"
+          />
+        </div>
+        <div className="flex gap-0.5">
+          <img
+            src="src/assets/smite.png"
+            className="rounded-sm sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
+            alt="Smite"
+          />
+          <img
+            src="src/assets/domination.png"
+            className="rounded-sm bg-neutral-700 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
+            alt="Domination"
+          />
         </div>
       </div>
     </div>
   );
 }
 
+
 function MatchKD() {
   return (
     <div className="flex flex-col items-center flex-shrink-0 ">
       <div className="flex items-center  text-lg tracking-tighter flex-shrink-0 ">
-        <div className="flex flex-shrink-0">
+        <div className="flex flex-shrink-0 sm:text-lg text-2xs leading-[16px]">
           <h2 className="pr-1">11</h2>
           <p className="font-[100] text-neutral-400 pr-1">/</p>
           <h2 className="pr-1">11</h2>
@@ -369,16 +422,16 @@ function MatchKD() {
         </div>
       </div>
       <div className="flex  ">
-        <h2 className="pr-1 font-bold text-xs text-[#6C7FFF]   leading-[16px] ">
+        <h2 className="pr-1 font-bold sm:text-xs text-2xs text-[#6C7FFF] ">
           3.86
         </h2>
-        <p className="font-thin text-xs  leading-[16px] ">KDA</p>
+        <p className="font-thin sm:text-xs   text-2xs leading-[16px] ">KDA</p>
       </div>
       <div className="flex items-center  leading-[16px]">
-        <p className="font-thin text-xs leading-[16px]">191 CS (6.2)</p>
+        <p className="font-thin sm:text-xs  text-2xs leading-[16px]">191 CS (6.2)</p>
       </div>
       <div className="flex">
-        <p className="font-thin text-xs leading-[16px]">27 vision</p>
+        <p className="font-thin sm:text-xs text-2xs leading-[16px]">27 vision</p>
       </div>
     </div>
   );
@@ -387,16 +440,17 @@ function MatchKD() {
 function MatchItems() {
   return (
     <div className="flex flex-shrink-0">
-      <img src="src/assets/items.png" className="min-h-full w-32 "></img>
+      <img src="src/assets/items.png" className="min-h-full sm:w-32  w-24"></img>
     </div>
   );
 }
 
 function MatchPlayers() {
   return (
-    <div className="flex flex-shrink-0 max-[1600px]:hidden">
-      <img src="src/assets/players.png" className="min-h-full w-48"></img>
+    <div className="flex flex-shrink-0 max-[1280px]:block max-[1600px]:hidden">
+      <img src="src/assets/players.png" className="min-h-full w-48" />
     </div>
   );
 }
+
 export default App;
