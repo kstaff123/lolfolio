@@ -1,6 +1,16 @@
 import { RankedSolo } from "./RankedSolo";
 import { MatchHistory } from "./MatchHistory";
+import rivensplashart from "./assets/rivensplashart.jpg";
+import rivenicon from "./assets/rivenicon.png";
 
+import diamond from "./assets/diamond.png";
+import kindredIcon from "./assets/kindredicon.png";
+import flash from "./assets/flash.png";
+import conqueror from "./assets/conqueror.png";
+import smite from "./assets/smite.png";
+import domination from "./assets/domination.png";
+import items from "./assets/items.png";
+import players from "./assets/players.png";
 export function Grid() {
     return (
       <section className="sm:mt-8 mt-2 flex justify-center">

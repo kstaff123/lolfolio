@@ -1,8 +1,6 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import rivensplashart from "./assets/rivensplashart.jpg";
+
 
 import { Header } from "./Header";
 import { ProfileCard } from "./ProfileCard";
@@ -15,11 +13,10 @@ import { Background } from "./Background";
 
 function App() {
   return (
+    fetchAccountData("legendsfate","NA1"),
     <div className="bg-background-purple min-h-screen relative overflow-hidden">
       {/* Background Art */}
       <Background />
-      {/* Gradient Overlay */}
-
       {/* Content */}
       <div className="relative z-[100]">
         <div className="max-[1280px]:hidden">
