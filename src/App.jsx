@@ -6,6 +6,13 @@ import rivensplashart from "./assets/rivensplashart.jpg";
 import rivenicon from "./assets/rivenicon.png";
 import logo from "./assets/logo.png";
 import diamond from "./assets/diamond.png";
+import kindredIcon from "./assets/kindredicon.png";
+import flash from "./assets/flash.png";
+import conqueror from "./assets/conqueror.png";
+import smite from "./assets/smite.png";
+import domination from "./assets/domination.png";
+import items from "./assets/items.png";
+import players from "./assets/players.png";
 
 function App() {
   return (
@@ -259,7 +266,7 @@ function MatchHistory() {
           </div>
         </div>
         <div className="flex items-center">
-          <img src="src/assets/kindredicon.png" className="size-6"></img>
+          <img src={kindredIcon} className="size-6"></img>
           <div className="flex flex-col ">
             <div className=" pl-2 flex sm:text-sm text-2xs">
               <h3>50%</h3>
@@ -366,7 +373,7 @@ function MatchChamp() {
       <div className="relative">
         {/* Kindred Icon */}
         <img
-          src="src/assets/kindredicon.png"
+          src={kindredIcon}
           className="size-10 sm:size-16 rounded-md relative"
           alt="Kindred Icon"
         />
@@ -381,24 +388,24 @@ function MatchChamp() {
       <div className="flex flex-col size-6 gap-[3px] ml-[2px] w-fit justify-center">
         <div className="flex gap-[2px]">
           <img
-            src="src/assets/flash.png"
+            src={flash}
             className="rounded-sm sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
             alt="Flash"
           />
           <img
-            src="src/assets/conqueror.png"
+            src={conqueror}
             className="rounded-sm bg-neutral-700 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
             alt="Conqueror"
           />
         </div>
         <div className="flex gap-0.5">
           <img
-            src="src/assets/smite.png"
+            src={smite}
             className="rounded-sm sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
             alt="Smite"
           />
           <img
-            src="src/assets/domination.png"
+            src={domination}
             className="rounded-sm bg-neutral-700 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
             alt="Domination"
           />
@@ -440,7 +447,7 @@ function MatchKD() {
 function MatchItems() {
   return (
     <div className="flex flex-shrink-0">
-      <img src="src/assets/items.png" className="min-h-full sm:w-32  w-24"></img>
+      <img src={items} className="min-h-full sm:w-32  w-24"></img>
     </div>
   );
 }
@@ -448,7 +455,7 @@ function MatchItems() {
 function MatchPlayers() {
   return (
     <div className="flex flex-shrink-0 max-[1280px]:block max-[1600px]:hidden">
-      <img src="src/assets/players.png" className="min-h-full w-48" />
+      <img src={players} className="min-h-full w-48" />
     </div>
   );
 }
