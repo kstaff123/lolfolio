@@ -5,6 +5,7 @@ import App from "./App.jsx";
 
 import { ProfileProvider } from "./ProfileContext.jsx";
 
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ProfileProvider>

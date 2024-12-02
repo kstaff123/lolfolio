@@ -129,6 +129,19 @@ export function MatchHistory() {
         <div className="min-[797px]:hidden">
           <MatchNoPlayers />
         </div>
+        <div className="max-[797px]:hidden">
+          <Match />
+        </div>
+        <div className="min-[797px]:hidden">
+          <MatchNoPlayers />
+        </div>
+        <div className="max-[797px]:hidden">
+          <Match />
+        </div>
+        <div className="min-[797px]:hidden">
+          <MatchNoPlayers />
+        </div>
+        
   
   
       </div>

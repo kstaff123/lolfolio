@@ -1,7 +1,5 @@
 import rivensplashart from "./assets/rivensplashart.jpg";
 import rivenicon from "./assets/rivenicon.png";
-
-import diamond from "./assets/diamond.png";
 import kindredIcon from "./assets/kindredicon.png";
 import flash from "./assets/flash.png";
 import conqueror from "./assets/conqueror.png";
@@ -9,8 +7,35 @@ import smite from "./assets/smite.png";
 import domination from "./assets/domination.png";
 import items from "./assets/items.png";
 import players from "./assets/players.png";
+import { useProfile } from "./ProfileContext.jsx";
+import iron from "./assets/Ranked Emblems Latest/Rank=Iron.png";
+import bronze from "./assets/Ranked Emblems Latest/Rank=Bronze.png";
+import silver from "./assets/Ranked Emblems Latest/Rank=Silver.png";
+import gold from "./assets/Ranked Emblems Latest/Rank=Gold.png";
+import platinum from "./assets/Ranked Emblems Latest/Rank=Platinum.png";
+import emerald from "./assets/Ranked Emblems Latest/Rank=Emerald.png";
+import diamond from "./assets/Ranked Emblems Latest/Rank=Diamond.png";
+import master from "./assets/Ranked Emblems Latest/Rank=Master.png";
+import grandmaster from "./assets/Ranked Emblems Latest/Rank=Grandmaster.png";
+import challenger from "./assets/Ranked Emblems Latest/Rank=Challenger.png";
+
+
 
 export function RankedSolo() {
+  const {profile} = useProfile();
+  console.log("RankedSolo Profile Data:", profile);
+  const rankKey = profile?.soloduorank?.split(" ")[0]?.toLowerCase(); // Get rank (e.g., "Diamond")
+  const rankicon = { iron, bronze, silver, gold, platinum, emerald, diamond, master, grandmaster, challenger }[rankKey];
+
+
+  if (!profile || !profile.soloduorank) {
+    return (
+      <div className="xl:col-span-3 col-span-1 p-1 xl:p-3 bg-neutral-700 rounded-xl drop-shadow-xl h-fit">
+        <h3 className="text-white text-sm">No ranked data available</h3>
+      </div>
+    );
+  }
+
     return (
       <div className="xl:col-span-3 col-span-1 p-1 xl:p-3 bg-neutral-700 rounded-xl drop-shadow-xl h-fit">
         <div flex flex-col>
@@ -30,20 +55,19 @@ export function RankedSolo() {
           </div>
           <div className="flex items-center sm:mt-2 mt-1 sm:mb-4 mb-2">
             <img
-              id="diamond"
-              src={diamond}
+              src={rankicon}
               className=" h-7 sm:h-11 drop-shadow-md pl-1"
             ></img>
             <div className="flex flex-col ml-2 w-full">
               <div className="flex justify-between w-full">
                 <h2 className="text-xs sm:text-base font-semibold p-0">
-                  Diamond 1
+                  {profile.soloduorank}
                 </h2>
-                <h2 className="text-2xs sm:text-base font-thin ">23 games</h2>
+                <h2 className="text-2xs sm:text-base font-thin ">{profile.soloduogames !== undefined && `${profile.soloduogames} games`}</h2>
               </div>
               <div className="flex justify-between w-full">
-                <h2 className="text-2xs sm:text-base font-thin">100 LP</h2>
-                <h2 className="text-2xs sm:text-base font-thin ">52% winrate</h2>
+                <h2 className="text-2xs sm:text-base font-thin">{profile.soloduolp !== undefined && `${profile.soloduolp} LP`}</h2>
+                <h2 className="text-2xs sm:text-base font-thin ">{profile.soloduowinrate !== undefined && `${profile.soloduowinrate}% winrate`}</h2>
               </div>
             </div>
           </div>
@@ -51,3 +75,4 @@ export function RankedSolo() {
       </div>
     );
   }
+  

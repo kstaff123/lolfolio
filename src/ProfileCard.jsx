@@ -47,11 +47,11 @@ export function ProfileCard() {
           <div className="flex max-h-fit items-start">
             <h6 className="text-gray-300 text-sm sm:text-lg">Rank</h6>
             <h6 className="text-white font-bold pl-1 text-sm sm:text-lg">
-              {profile.rank || "Unranked"}
+              {profile.numberrank || "Unranked"}
             </h6>
             <h6 className="text-gray-300 pl-1 text-sm sm:text-lg">
-              {profile.rankPercentage
-                ? `(top ${profile.rankPercentage}%)`
+              {profile.rankpercentile
+                ? `(top ${profile.rankpercentile}%)`
                 : ""}
             </h6>
           </div>

@@ -1,5 +1,6 @@
 import { RankedSolo } from "./RankedSolo";
 import { MatchHistory } from "./MatchHistory";
+import { RankedFlex } from "./RankedFlex";
 import rivensplashart from "./assets/rivensplashart.jpg";
 import rivenicon from "./assets/rivenicon.png";
 
@@ -17,7 +18,7 @@ export function Grid() {
         <div className="grid xl:grid-cols-12 grid-cols-2  gap-4 min-[1600px]:max-w-[1526px] w-11/12  text-white auto-rows-fr ">
           <RankedSolo />
           <MatchHistory />
-          <RankedSolo />
+          <RankedFlex />
         </div>
       </section>
     );
@@ -28,7 +29,7 @@ export function Grid() {
       <section className="sm:mt-8 mt-2 flex justify-center ">
         <div className="grid xl:grid-cols-12 grid-cols-2  gap-4 xl:w-5/6 w-11/12  text-white">
           <RankedSolo />
-          <RankedSolo />
+          <RankedFlex />
           <MatchHistory />
         </div>
       </section>

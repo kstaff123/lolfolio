@@ -1,77 +1,23 @@
 import React, { useState } from "react";
 import { useProfile } from "./ProfileContext.jsx";
-import { fetchAccountData, FetchAccountLevel } from "./riotapifetcher";
+import { handleAccountSearch } from "./apiHandler.js"; // Import the new handler
 import logo from "./assets/logo.png";
 
 export function Header() {
-  const { cache, setCache, setProfile, setLoading, setMatchHistory } = useProfile();
+  const { setLoading, setProfile, setCache, setMatchHistory } = useProfile();
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearch = async () => {
     setLoading(true);
-  
-    // Parse input into name and tagline
-    const [inputName, inputTagline] = searchInput.includes("#")
-      ? searchInput.split("#")
-      : [searchInput, ""]; // Default to empty tagline if no `#`
-  
-    if (!inputName) {
-      console.error("Invalid input: Account name is required.");
-      setLoading(false);
-      return;
-    }
-  
-    const cacheKey = `${inputName.toLowerCase()}#${inputTagline.toLowerCase()}`; // Normalize cache key for consistent lookups
-  
-    // Check cache for existing data
-    if (cache[cacheKey]) {
-      console.log("Loading profile from cache");
-      setProfile(cache[cacheKey]);
-      setLoading(false);
-      return;
-    }
-  
     try {
-      // Fetch account data from the API
-      const accountData = await fetchAccountData(inputName, inputTagline); // Fetch API data
-      if (!accountData || !accountData.gameName || !accountData.tagLine) {
-        console.error("Invalid response from API. Ensure the account exists.");
-        setLoading(false);
-        return;
-      }
-
-      const accountLevel = await FetchAccountLevel(accountData.puuid); // Fetch Account Level with PUUID from prev response
-      if (!accountLevel || !accountLevel.summonerLevel || !accountLevel.profileIconId) {
-        console.error("Invalid response from API. Ensure the account exists.");
-        setLoading(false);
-        return;
-      }
-  
-      // Extract the properly formatted name and tagline from API response
-      const formattedName = accountData.gameName; // Proper casing for name
-      const formattedTagline = accountData.tagLine; // Proper casing for tag
-  
-      // Build the profile data
-      const profileData = {
-        name: formattedName,
-        tagline: formattedTagline,
-        icon: accountLevel.profileIconId, // Example additional field
-        level: accountLevel.summonerLevel, // Example additional field
-      };
-  
-      // Cache and update profile
-      setCache((prev) => ({ ...prev, [cacheKey]: profileData })); // Cache response
-      setProfile(profileData); // Update context with profile data
-      setMatchHistory([]); // Reset match history (if applicable)
+      await handleAccountSearch(searchInput, { setProfile, setCache, setMatchHistory }); // Pass input and profile setters
     } catch (error) {
-      console.error("Error fetching profile:", error);
+      console.error("Error during search:", error);
     } finally {
       setLoading(false);
     }
   };
-  
-  
-  
+
   return (
     <header className="bg-neutral-700 flex h-20 font-montserrat w-full text-white font-extralight border-none drop-shadow-lg shadow-black">
       <div className="flex items-center mx-4 min-w-[300px]">
@@ -101,7 +47,6 @@ export function Header() {
             stroke="currentColor"
             className="size-6 mx-2 stroke-neutral-400 group-hover:stroke-white hover:cursor-pointer stroke-2 flex-shrink-0"
             onClick={handleSearch} // Trigger search on click
-            
           >
             <path
               strokeLinecap="round"
