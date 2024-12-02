@@ -48,3 +48,30 @@ export const fetchRankPercentile = async (summonerId) => {
   }
 };
 
+export const fetchMatchHistory = async (puuid, start = 0, count = 10) => {
+  try {
+    const response = await fetch(`/api/match-history/${puuid}?start=${start}&count=${count}`);
+    if (!response.ok) throw new Error("Failed to fetch match history");
+    return response.json(); // Returns array of match IDs
+  } catch (error) {
+    console.error("Error fetching match history:", error);
+    return [];
+  }
+};
+
+
+export const fetchMatchById = async (matchId) => {
+  try {
+    const response = await fetch(`/api/match/${matchId}`);
+    if (!response.ok) throw new Error("Failed to fetch match data");
+    return response.json(); // Returns { id: matchId, data: matchData }
+  } catch (error) {
+    console.error(`Error fetching match ${matchId}:`, error);
+    return null;
+  }
+};
+
+
+
+
+

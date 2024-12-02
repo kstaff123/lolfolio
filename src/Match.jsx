@@ -1,6 +1,6 @@
 import rivensplashart from "./assets/rivensplashart.jpg";
 import rivenicon from "./assets/rivenicon.png";
-
+import React, {useState, useEffect} from "react";
 import diamond from "./assets/diamond.png";
 import kindredIcon from "./assets/kindredicon.png";
 import flash from "./assets/flash.png";
@@ -9,18 +9,69 @@ import smite from "./assets/smite.png";
 import domination from "./assets/domination.png";
 import items from "./assets/items.png";
 import players from "./assets/players.png";
+import { fetchMatchById } from "./riotapifetcher";
+import { useProfile } from "./ProfileContext";
 
-export function Match() {
-    return (
-      <div className="flex bg-[#323B7B] sm:mx-6 mx-2 my-2 items-center p-3 drop-shadow-md gap-2 sm:gap-4 text-center justify-between ">
-        <MatchType />
-        <MatchChamp />
-        <MatchKD />
-        <MatchItems />
-        <MatchPlayers />
-      </div>
-    );
+
+
+
+
+
+export function Match({ matchId }) {
+  const { profile } = useProfile();
+  const puuid = profile?.puuid;
+
+  const [matchData, setMatchData] = useState(null);
+  const [participantData, setParticipantData] = useState(null);
+
+  useEffect(() => {
+    const loadMatchData = async () => {
+      const data = await fetchMatchById(matchId);
+      setMatchData(data?.data || null); // Extract match data from response
+
+      if (data?.data) {
+        // Find participant index
+        const participantIndex = data.data.metadata.participants.indexOf(puuid);
+
+        if (participantIndex !== -1) {
+          // Extract participant data
+          const participantInfo = data.data.info.participants[participantIndex];
+          setParticipantData(participantInfo);
+        } else {
+          console.error(`PUUID ${puuid} not found in participants.`);
+        }
+      }
+    };
+
+    loadMatchData();
+  }, [matchId, puuid]);
+
+  if (!matchData || !participantData) {
+    return <p>Loading match...</p>;
   }
+
+  const { gameMode, gameDuration } = matchData.info; // Overall match data
+  const duration = `${Math.floor(gameDuration / 60)}:${gameDuration % 60}`;
+
+  const {
+    championName,
+    kills,
+    deaths,
+    assists,
+    totalMinionsKilled,
+    visionScore,
+    items,
+  } = participantData; // Participant-specific data
+  
+  return (
+    <div className="flex bg-[#323B7B] sm:mx-6 mx-2 my-2 items-center p-3 drop-shadow-md gap-2 sm:gap-4 text-center justify-between ">
+      <MatchType gameMode={gameMode} gameDuration={gameDuration} />
+      <MatchChamp championName={championName} />
+      <MatchKD kills={kills} deaths={deaths} assists={assists} />
+      <MatchItems items={items} />
+    </div>
+  );
+}
 
   export function MatchNoPlayers() {
     return (
@@ -33,26 +84,19 @@ export function Match() {
     );
   }
 
-  function MatchType() {
+  function MatchType({ gameMode, gameDuration }) {
+    const duration = `${Math.floor(gameDuration / 60)}:${gameDuration % 60}`;
+  
     return (
       <div className="flex flex-col items-center flex-shrink-0">
-        <h2 className="sm:text-sm font-semibold text-2xs max-[640px]:leading-[12px]">Ranked Solo</h2>
-        <p className="sm:text-xs font-thin text-2xs max-[640px]:leading-[12px]">11/22</p>
-        <div className="flex items-center ">
-          <svg
-            width="9"
-            height="5"
-            viewBox="0 0 9 5"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M4.5 0L8.39711 4.5H0.602886L4.5 0Z" fill="#6C7FFF" />
-          </svg>
-          <h1 className="font-semibold pl-1 sm:text-lg max-[640px]:leading-[12px] text-2xs">26 LP</h1>
-        </div>
+        <h2 className="sm:text-sm font-semibold text-2xs max-[640px]:leading-[12px]">
+          {gameMode}
+        </h2>
         <div className="flex sm:my-1">
-          <h2 className="pr-1 font-bold sm:text-xs text-[#6C7FFF] text-2xs  max-[640px]:leading-[12px]">WIN</h2>
-          <p className="font-thin sm:text-xs text-2xs max-[640px]:leading-[12px]">30:38</p>
+          <h2 className="pr-1 font-bold sm:text-xs text-[#6C7FFF] text-2xs  max-[640px]:leading-[12px]">
+            WIN
+          </h2>
+          <p className="font-thin sm:text-xs text-2xs max-[640px]:leading-[12px]">{duration}</p>
         </div>
       </div>
     );

@@ -34,6 +34,8 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
     // Fetch rank percentile
     const rankPercentile = await fetchRankPercentile(accountLevel.id);
 
+    const puuid = accountData.puuid;
+
     // Helper functions for formatting rank
     const romanToNumber = (roman) => {
       const romanNumerals = {
@@ -88,6 +90,7 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
       flexwinrate,
       rankpercentile: rankPercentile?.percentile || "Unknown",
       numberrank: rankPercentile?.rank || "Unknown",
+      puuid: puuid,
     };
 
     // Cache and update profile
@@ -117,6 +120,7 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
       flexwinrate: "N/A",
       rankpercentile: "Unknown",
       numberrank: "Unknown",
+      puuid: "",
     };
 
     setProfile(fallbackProfile);
