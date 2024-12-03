@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: import.meta.env.VITE_API_BASE_URL, // Correct way to access Vite env variables
+        target: meta.env.VITE_API_BASE_URL, // Correct way to access Vite env variables
         changeOrigin: true,
       },
     },
