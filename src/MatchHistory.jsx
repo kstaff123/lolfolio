@@ -16,18 +16,38 @@ export function MatchHistory() {
   // Load match IDs when the component mounts or the puuid changes
   useEffect(() => {
     if (!puuid) return; // Skip fetching if puuid is undefined
-    setMatchIds([]); // Reset match IDs if puuid changes
+  
+    // Clear previous match data when a new profile is loaded
+    setMatchIds([]); // Reset match IDs
     setStart(0); // Reset start index
     setHasMoreMatches(true); // Reset "has more" flag
-    loadMoreMatches();
+  
+    // Fetch the first batch of matches immediately
+    const fetchInitialMatches = async () => {
+      setLoading(true); // Start loading
+      try {
+        const initialMatches = await fetchMatchHistory(puuid, 0, count); // Fetch the first batch
+        if (initialMatches.length < count) {
+          setHasMoreMatches(false); // No more matches to load
+        }
+        setMatchIds(initialMatches); // Set the initial match IDs
+      } catch (error) {
+        console.error("Error fetching match history:", error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchInitialMatches(); // Call the fetch function
   }, [puuid]);
 
+  // Load more matches when "Load More" is clicked
   const loadMoreMatches = async () => {
     if (!puuid || loading || !hasMoreMatches) return; // Prevent multiple fetches or fetch without puuid
 
     setLoading(true);
     try {
-      const newMatchIds = await fetchMatchHistory(puuid, start, count); // Fetch only match IDs
+      const newMatchIds = await fetchMatchHistory(puuid, start + count, count); // Fetch additional match IDs
       if (newMatchIds.length < count) {
         setHasMoreMatches(false); // No more matches to load
       }

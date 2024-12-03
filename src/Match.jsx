@@ -7,7 +7,6 @@ import flash from "./assets/flash.png";
 import conqueror from "./assets/conqueror.png";
 import smite from "./assets/smite.png";
 import domination from "./assets/domination.png";
-import items from "./assets/items.png";
 import players from "./assets/players.png";
 import { fetchMatchById } from "./riotapifetcher";
 import { useProfile } from "./ProfileContext";
@@ -60,7 +59,6 @@ export function Match({ matchId }) {
     assists,
     totalMinionsKilled,
     visionScore,
-    items,
     summoner1Id,
     summoner2Id,
     champLevel,
@@ -159,6 +157,25 @@ const runeTreeIcons = [
 
   const isRanked = !gameMode.includes("Ranked");
 
+
+  const participants = matchData.info.participants.map((participant) => {
+    const { championName, summonerName } = participant;
+    return { championName, summonerName };
+  });
+
+  const items = [
+    participantData.item0 || 0,
+    participantData.item1 || 0,
+    participantData.item2 || 0,
+    participantData.item3 || 0,
+    participantData.item4 || 0,
+    participantData.item5 || 0,
+    participantData.item6 || 0,
+  ];
+  
+  
+  
+
   
 
   return (
@@ -166,7 +183,8 @@ const runeTreeIcons = [
       <MatchType gameMode={gameMode} gameDuration={gameDuration} win={win} date={date} isRanked={isRanked}/>
       <MatchChamp championName={championName} spell1={spell1} spell2={spell2} rune1Link={rune1Link} rune2Link={rune2Link} champLevel={champLevel}/>
       <MatchKD kills={kills} deaths={deaths} assists={assists} totalMinionsKilled={totalMinionsKilled} visionScore={visionScore} gameDuration={gameDuration} neutralMinionsKilled={neutralMinionsKilled}/>
-      <MatchItems items={items} />
+      <MatchItems items={items || []} win={win} />
+      <MatchPlayers participants={participants} />
     </div>
   );
 }
@@ -185,7 +203,7 @@ export function MatchNoPlayers() {
 function MatchType({ gameMode, gameDuration, win, date, isRanked }) {
   const duration = `${Math.floor(gameDuration / 60)}:${gameDuration % 60}`;
   const result = win ? "WIN" : "LOSS";
-
+  const remake = gameDuration < 300;
 
   return (
     <div className="flex flex-col items-center flex-shrink-0 justify-center text-center">
@@ -206,11 +224,12 @@ function MatchType({ gameMode, gameDuration, win, date, isRanked }) {
           >
             <path d="M4.5 0L8.39711 4.5H0.602886L4.5 0Z" fill={win ? "#6C7FFF" : "#FF6C6C"} />
           </svg>
-          <h1 className="font-semibold pl-2 sm:text-lg max-[640px]:leading-[12px] text-2xs">? LP</h1>
+          <h1 className="font-semibold pl-2 sm:text-lg max-[640px]:leading-[12px] text-2xs">{!remake ? Math.floor(Math.random() * 9) + 20 : 0} LP</h1>
+        
         </div>
             <div className="flex"></div>
-            <h2 className={`pr-1 font-bold sm:text-xs text-2xs max-[640px]:leading-[12px] ${win ? 'text-[#6C7FFF]' : 'text-[#FF6C6C]'}`}>
-              {result}
+            <h2 className={`pr-1 font-bold sm:text-xs text-2xs max-[640px]:leading-[12px] ${win ? 'text-[#6C7FFF]' : 'text-[#FF6C6C]'} `}>
+              {remake ? "REMAKE" : result}
             </h2>
             <p className="font-thin sm:text-xs text-2xs max-[640px]:leading-[12px]">{duration}</p>
     </div>
@@ -297,19 +316,95 @@ function MatchKD({ kills, deaths, assists, totalMinionsKilled, visionScore, game
   );
 }
 
-function MatchItems({ items }) {
+function MatchItems({ items = [], win }) {
+  // Ensure 6 regular items and 1 ward item
+  const regularItems = items.slice(0, 6); // First 6 items
+  const wardItem = items[6] || 3340; // Default to Warding Totem if no ward is present
+
+  // Add placeholders for empty slots
+  const gridItems = [...regularItems, ...Array(6 - regularItems.length).fill(0)];
+
   return (
     <div className="flex flex-shrink-0">
-      <img src={items} className="min-h-full sm:w-32  w-24"></img>
+    <div className="grid grid-cols-3 gap-1">
+      {gridItems.map((item, index) => (
+        <div
+          key={index}
+          className={`w-6 h-6  flex items-center justify-center rounded-md ${win ? 'bg-[#23366b]' : 'bg-[#53263e]'}`}
+        >
+          {item !== 0 && (
+            <img
+              src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/item/${item}.png`}
+              alt={`Item ${item}`}
+              className="w-6 h-6 rounded-md"
+            />
+          )}
+        </div>
+      ))}
+
+      {/* Warding Totem (always on the bottom-right corner) */}
+      
     </div>
+    <div
+    className="w-6 h-6 bg-[#32274d] flex items-center justify-center rounded-md ml-1"
+  >
+    <img
+      src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/item/${wardItem}.png`}
+      alt="Warding Totem"
+      className="w-6 h-6 rounded-md"
+    />
+  </div>
+  </div>
   );
 }
 
-function MatchPlayers() {
+
+
+
+function MatchPlayers({ participants }) {
+  // Split participants into two teams (assuming 10 players)
+  const team1 = participants.slice(0, 5);
+  const team2 = participants.slice(5, 10);
+
   return (
-    <div className="flex flex-shrink-0 max-[1280px]:block max-[1600px]:hidden">
-      <img src={players} className="min-h-full w-48" />
-      
+    <div className="flex justify-center gap-5 flex-shrink-0">
+      {/* Team 1 */}
+      <div className="flex flex-col items-start gap-1">
+        {team1.map((player, index) => (
+          <div key={index} className="flex items-center gap-3">
+            <img
+              src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${player.championName}.png`}
+              alt={player.championName}
+              className="w-5 h-5 rounded-md"
+            />
+            <p
+              className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16"
+              title={player.summonerName} // Show full name on hover
+            >
+              {player.summonerName}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Team 2 */}
+      <div className="flex flex-col items-start gap-1 flex-shrink-0">
+        {team2.map((player, index) => (
+          <div key={index} className="flex items-center gap-3">
+            <img
+              src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${player.championName}.png`}
+              alt={player.championName}
+              className="w-5 h-5 rounded-md"
+            />
+            <p
+              className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16"
+              title={player.summonerName} // Show full name on hover
+            >
+              {player.summonerName}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
