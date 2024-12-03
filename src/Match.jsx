@@ -272,7 +272,7 @@ function MatchChamp({championName, spell1, spell2, rune1Link, rune2Link, champLe
             alt={`${spell1}`}
           />
           <img
-            src = {rune1Link}
+            src={rune1Link || "fallback_image_url"}
             className="rounded-sm bg-neutral-700 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
             alt="Conqueror"
           />
@@ -373,8 +373,8 @@ function MatchItems({ items = [], win }) {
 
 function MatchPlayers({ participants }) {
   // Split participants into two teams (assuming 10 players)
-  const team1 = participants.slice(0, 5);
-  const team2 = participants.slice(5, 10);
+  const team1 = participants?.slice(0, 5);
+  const team2 = participants?.slice(5, 10);
 
   return (
     <div className="flex justify-center gap-5 flex-shrink-0">
