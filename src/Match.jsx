@@ -64,6 +64,7 @@ export function Match({ matchId }) {
     champLevel,
     neutralMinionsKilled,
     win, // Extract win status
+    spell1used,
 
   } = participantData; // Participant-specific data
   
