@@ -34,6 +34,11 @@ export function Match({ matchId }) {
           const participantInfo = data.data.info.participants[participantIndex];
           setParticipantData(participantInfo);
           
+          if (participantIndex === -1) {
+            console.error(`PUUID ${puuid} not found in participants.`);
+            return <p>Participant not found in this match.</p>;
+          }
+          
         } else {
           console.error(`PUUID ${puuid} not found in participants.`);
         }
@@ -115,9 +120,11 @@ export function Match({ matchId }) {
   console.log("Spell1:", spell1);
   console.log("Spell2:", spell2);
 
-  const rune1 = participantData.perks.styles[0].selections[0].perk; // Rune ID
+  const rune1 = participantData?.perks?.styles?.[0]?.selections?.[0]?.perk || null;
+
+
 const rune1style = participantData.perks.styles[0].style; // Tree ID
-const rune2 = participantData.perks.styles[1].style; // Secondary Tree ID
+const rune2 = participantData?.perks?.styles?.[1]?.style || null;
 
 // Find the tree key for the primary rune
 const tree1 = allRunes.find((rune) => rune.treeId === rune1style)?.treeKey;
@@ -244,10 +251,11 @@ function MatchChamp({championName, spell1, spell2, rune1Link, rune2Link, champLe
       <div className="relative">
         {/* Kindred Icon */}
         <img
-          src = {`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${championName}.png`}
-          className="size-10 sm:size-16 rounded-md relative"
-          alt="Kindred Icon"
-        />
+  src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${championName || "Unknown"}.png`}
+  alt={championName || "Unknown Champion"}
+  className="size-10 sm:size-16 rounded-md"
+/>
+
 
         {/* Level Text */}
         <div className="bg-neutral-800 sm:w-4 sm:h-4 w-3 h-3 text-center rounded-bl-md flex items-center justify-center absolute bottom-0 left-0">
