@@ -371,28 +371,23 @@ function MatchItems({ items = [], win }) {
 
 
 
-function MatchPlayers({ participants }) {
-  // Split participants into two teams (assuming 10 players)
-  const team1 = participants?.slice(0, 5);
-  const team2 = participants?.slice(5, 10);
+function MatchPlayers({ participants = [] }) {
+  // Ensure participants is an array
+  const team1 = participants?.slice(0, 5) || [];
+  const team2 = participants?.slice(5, 10) || [];
 
   return (
     <div className="flex justify-center gap-5 flex-shrink-0">
       {/* Team 1 */}
       <div className="flex flex-col items-start gap-1">
-        {team1?.map((player, index) => (
+        {team1.map((player, index) => (
           <div key={index} className="flex items-center gap-3">
             <img
-              src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${player.championName}.png`}
-              alt={player.championName}
+              src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${player?.championName || "Unknown"}.png`}
+              alt={player?.championName || "Unknown"}
               className="w-5 h-5 rounded-md"
             />
-            <p
-              className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16"
-              title={player.summonerName} // Show full name on hover
-            >
-              {player.summonerName}
-            </p>
+            <p className="text-white font-light text-xs">{player?.summonerName || "Unknown Player"}</p>
           </div>
         ))}
       </div>
@@ -402,16 +397,11 @@ function MatchPlayers({ participants }) {
         {team2.map((player, index) => (
           <div key={index} className="flex items-center gap-3">
             <img
-              src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${player.championName}.png`}
-              alt={player.championName}
+              src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${player?.championName || "Unknown"}.png`}
+              alt={player?.championName || "Unknown"}
               className="w-5 h-5 rounded-md"
             />
-            <p
-              className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16"
-              title={player.summonerName} // Show full name on hover
-            >
-              {player.summonerName}
-            </p>
+            <p className="text-white font-light text-xs">{player?.summonerName || "Unknown Player"}</p>
           </div>
         ))}
       </div>
