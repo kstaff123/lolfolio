@@ -7,10 +7,9 @@ export default defineConfig({
   base: "/lolfolio/",
   server: {
     proxy: {
-      "/api": {
-        target: "lolfoliobackend-production.up.railway.app", // Your backend server URL
+      '/api': {
+        target: import.meta.env.VITE_API_BASE_URL,
         changeOrigin: true,
-        secure: false,
       },
     },
   },

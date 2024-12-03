@@ -1,6 +1,9 @@
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+
 export const fetchAccountData = async (gameName,tagLine) => {
   try {
-    const response = await fetch(`/api/account/${gameName}/${tagLine}`);
+    const response = await fetch(`${baseUrl}/api/account/${gameName}/${tagLine}`);
     if (!response.ok) throw new Error("Failed to fetch account data");
     console.log("Response:", response);
     return response.json();
@@ -13,7 +16,7 @@ export const fetchAccountData = async (gameName,tagLine) => {
 
 export const FetchAccountLevel = async (PUUID) => {
   try {
-    const response = await fetch(`/api/summoner/${PUUID}`);
+    const response = await fetch(`${baseUrl}/api/summoner/${PUUID}`);
     if (!response.ok) throw new Error("Failed to fetch account data");
     console.log("Response:", response);
     return response.json();
@@ -26,7 +29,7 @@ export const FetchAccountLevel = async (PUUID) => {
 
 export const fetchRankedData = async (encryptedSummonerId) => {
   try {
-    const response = await fetch(`/api/league/${encryptedSummonerId}`);
+    const response = await fetch(`${baseUrl}/api/league/${encryptedSummonerId}`);
     if (!response.ok) throw new Error("Failed to fetch ranked data");
     console.log("Response:", response);
     return response.json();
@@ -38,7 +41,7 @@ export const fetchRankedData = async (encryptedSummonerId) => {
 
 export const fetchRankPercentile = async (summonerId) => {
   try {
-    const response = await fetch(`/api/player/${summonerId}`);
+    const response = await fetch(`${baseUrl}/api/player/${summonerId}`);
     if (!response.ok) throw new Error("Failed to fetch player data");
     console.log("Fetched rank percentile:", response);
     return response.json();
@@ -50,7 +53,7 @@ export const fetchRankPercentile = async (summonerId) => {
 
 export const fetchMatchHistory = async (puuid, start = 0, count = 10) => {
   try {
-    const response = await fetch(`/api/match-history/${puuid}?start=${start}&count=${count}`);
+    const response = await fetch(`${baseUrl}/api/match-history/${puuid}?start=${start}&count=${count}`);
     if (!response.ok) throw new Error("Failed to fetch match history");
     return response.json(); // Returns array of match IDs
   } catch (error) {
@@ -62,7 +65,7 @@ export const fetchMatchHistory = async (puuid, start = 0, count = 10) => {
 
 export const fetchMatchById = async (matchId) => {
   try {
-    const response = await fetch(`/api/match/${matchId}`);
+    const response = await fetch(`${baseUrl}/api/match/${matchId}`);
     if (!response.ok) throw new Error("Failed to fetch match data");
     return response.json(); // Returns { id: matchId, data: matchData }
   } catch (error) {
