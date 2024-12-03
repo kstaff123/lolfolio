@@ -12,6 +12,7 @@ import { fetchMatchById } from "./riotapifetcher";
 import { useProfile } from "./ProfileContext";
 import queueData from ".//queuetypes.json";
 
+
 export function Match({ matchId }) {
   const { profile } = useProfile();
   const puuid = profile?.puuid;
@@ -64,7 +65,6 @@ export function Match({ matchId }) {
     champLevel,
     neutralMinionsKilled,
     win, // Extract win status
-    spell1used,
 
   } = participantData; // Participant-specific data
   
@@ -197,6 +197,7 @@ export function MatchNoPlayers() {
       <MatchChamp />
       <MatchKD />
       <MatchItems />
+      <MatchPlayers />
     </div>
   );
 }
