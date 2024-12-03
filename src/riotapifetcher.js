@@ -1,5 +1,6 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
-
+const baseUrl = import.meta.env.VITE_BACKEND_API;
+console.log(import.meta.env);
+console.log("Base URL:", baseUrl);
 
 export const fetchAccountData = async (gameName,tagLine) => {
   try {

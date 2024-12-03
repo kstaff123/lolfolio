@@ -9,11 +9,5 @@ export default defineConfig({
     'process.env': {}, // Ensure process.env is defined for legacy compatibility
   },
   server: {
-    proxy: {
-      '/api': {
-        target: process.env.VITE_BASE_URL,
-        changeOrigin: true,
-      },
-    },
   },
 });
