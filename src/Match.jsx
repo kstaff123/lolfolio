@@ -387,7 +387,7 @@ function MatchPlayers({ participants = [] }) {
               alt={player?.championName || "Unknown"}
               className="w-5 h-5 rounded-md"
             />
-            <p className="text-white font-light text-xs">{player?.summonerName || "Unknown Player"}</p>
+            <p className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16">{player?.summonerName || "Unknown Player"}</p>
           </div>
         ))}
       </div>
@@ -401,7 +401,7 @@ function MatchPlayers({ participants = [] }) {
               alt={player?.championName || "Unknown"}
               className="w-5 h-5 rounded-md"
             />
-            <p className="text-white font-light text-xs">{player?.summonerName || "Unknown Player"}</p>
+            <p className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16">{player?.summonerName || "Unknown Player"}</p>
           </div>
         ))}
       </div>
