@@ -380,7 +380,7 @@ function MatchPlayers({ participants }) {
     <div className="flex justify-center gap-5 flex-shrink-0">
       {/* Team 1 */}
       <div className="flex flex-col items-start gap-1">
-        {team1.map((player, index) => (
+        {team1?.map((player, index) => (
           <div key={index} className="flex items-center gap-3">
             <img
               src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${player.championName}.png`}
