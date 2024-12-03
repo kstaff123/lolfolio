@@ -5,10 +5,13 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "/lolfolio/",
+  define: {
+    'process.env': {}, // Ensure process.env is defined for legacy compatibility
+  },
   server: {
     proxy: {
       '/api': {
-        target: import.meta.env.VITE_API_BASE_URL,
+        target: proccess.env.VITE_API_BASE_URL,
         changeOrigin: true,
       },
     },
