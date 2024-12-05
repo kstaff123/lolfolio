@@ -33,6 +33,7 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
 
     // Fetch rank percentile
     const rankPercentile = await fetchRankPercentile(accountLevel.id);
+    console.log("Rank percentile:", rankPercentile);
 
     const puuid = accountData.puuid;
 
