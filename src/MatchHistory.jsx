@@ -62,7 +62,7 @@ export function MatchHistory() {
 
   if (!profile || !puuid) {
     return (
-      <main className="font-montserrat flex justify-center">
+      <main className="font-montserrat flex justify-center xl:col-span-6 col-span-2 py-1 xl:py-3 bg-neutral-700 rounded-xl drop-shadow-xl mb-10">
         <p className="text-white">No profile loaded. Search for a summoner.</p>
       </main>
     );

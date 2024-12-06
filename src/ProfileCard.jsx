@@ -7,7 +7,7 @@ export function ProfileCard() {
   // If loading, show a loading spinner or message
   if (loading) {
     return (
-      <main className="font-montserrat flex justify-center">
+      <main className="font-montserrat flex justify-center m-11">
         <p className="text-white">Loading...</p>
       </main>
     );
@@ -16,7 +16,7 @@ export function ProfileCard() {
   // If profile is null or undefined, show a fallback
   if (!profile) {
     return (
-      <main className="font-montserrat flex justify-center">
+      <main className="font-montserrat flex justify-center m-11">
         <p className="text-white">No profile loaded. Search for a summoner.</p>
       </main>
     );
