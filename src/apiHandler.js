@@ -1,4 +1,4 @@
-import { fetchAccountData, FetchAccountLevel, fetchRankedData, fetchRankPercentile } from "./riotapifetcher";
+import { fetchAccountData, FetchAccountLevel, fetchRankedData, fetchRankPercentile, fetchChampMastery } from "./riotapifetcher";
 
 // Handler for account search
 export const handleAccountSearch = async (searchInput, { setProfile, setCache, setMatchHistory }) => {
@@ -34,6 +34,9 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
     // Fetch rank percentile
     const rankPercentile = await fetchRankPercentile(accountLevel.id);
     console.log("Rank percentile:", rankPercentile);
+
+    const championMastery = await fetchChampMastery(accountData.puuid);
+    console.log("Champion Mastery:", championMastery);
 
     const puuid = accountData.puuid;
 

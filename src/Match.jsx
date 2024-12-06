@@ -22,6 +22,7 @@ export function Match({ matchId }) {
 
   useEffect(() => {
     const loadMatchData = async () => {
+      
       const data = await fetchMatchById(matchId);
       setMatchData(data?.data || null); // Extract match data from response
 
@@ -54,6 +55,7 @@ export function Match({ matchId }) {
 
   const { gameDuration } = matchData.info; // Overall match data
   const duration = `${Math.floor(gameDuration / 60)}:${gameDuration % 60}`;
+  console.log(matchId);
 
   console.log("Rune 1:", participantData.perks.styles[0].selections[0].perk);
   console.log("Rune 2:", participantData.perks.styles[1].style);
@@ -219,8 +221,8 @@ function MatchType({ gameMode, gameDuration, win, date, isRanked }) {
       <h2 className="sm:text-sm font-semibold text-2xs max-[640px]:leading-[12px]">
         {gameMode}
       </h2>
-      <p className="sm:text-xs font-thin text-2xs max-[640px]:leading-[12px]">{date}</p>
-      <div className={`flex items-center ${isRanked ? `hidden` : 'visible'} `}>
+      <p className="sm:text-xs font-reg text-2xs max-[640px]:leading-[12px] text-[#cddcfe]">{date}</p>
+      <div className={`flex items-center space-x-2 ${isRanked ? `hidden` : 'visible'} `}>
           <svg 
             width="9"
             height="5"
@@ -233,14 +235,15 @@ function MatchType({ gameMode, gameDuration, win, date, isRanked }) {
           >
             <path d="M4.5 0L8.39711 4.5H0.602886L4.5 0Z" fill={win ? "#6C7FFF" : "#FF6C6C"} />
           </svg>
-          <h1 className="font-semibold pl-2 sm:text-lg max-[640px]:leading-[12px] text-2xs">{!remake ? Math.floor(Math.random() * 9) + 20 : 0} LP</h1>
+          <h1 className="font-semibold sm:text-lg max-[640px]:leading-[12px] text-2xs">{!remake ? Math.floor(Math.random() * 9) + 20 : 0} LP</h1>
         
         </div>
-            <div className="flex"></div>
-            <h2 className={`pr-1 font-bold sm:text-xs text-2xs max-[640px]:leading-[12px] ${win ? 'text-[#6C7FFF]' : 'text-[#FF6C6C]'} `}>
-              {remake ? "REMAKE" : result}
-            </h2>
-            <p className="font-thin sm:text-xs text-2xs max-[640px]:leading-[12px]">{duration}</p>
+            <div className="flex">
+              <h2 className={`pr-1 font-bold sm:text-xs text-2xs max-[640px]:leading-[12px] ${win ? 'text-[#6C7FFF]' : 'text-[#FF6C6C]'} `}>
+                {remake ? "REMAKE" : result}
+              </h2>
+              <p className="font-reg sm:text-xs text-2xs max-[640px]:leading-[12px] text-[#cddcfe]">{duration}</p>
+            </div>
     </div>
   );
 }
@@ -302,10 +305,10 @@ function MatchKD({ kills, deaths, assists, totalMinionsKilled, visionScore, game
   return (
     <div className="flex flex-col items-center flex-shrink-0 ">
       <div className="flex items-center  text-lg tracking-tighter flex-shrink-0 ">
-        <div className="flex flex-shrink-0 sm:text-lg text-2xs leading-[16px]">
+        <div className="flex flex-shrink-0 sm:text-lg text-2xs leading-[16px] font-semibold">
           <h2 className="pr-1">{kills}</h2>
           <p className="font-[100] text-neutral-400 pr-1">/</p>
-          <h2 className="pr-1">{deaths}</h2>
+          <h2 className="pr-1 text-[#ff4e50]">{deaths}</h2>
           <p className="font-[100] text-neutral-400 pr-1">/</p>
           <h2 className="pr-1">{assists}</h2>
         </div>
@@ -314,13 +317,13 @@ function MatchKD({ kills, deaths, assists, totalMinionsKilled, visionScore, game
         <h2 className="pr-1 font-bold sm:text-xs text-2xs text-[#6C7FFF] ">
           {kda}
         </h2>
-        <p className="font-thin sm:text-xs   text-2xs leading-[16px] ">KDA</p>
+        <p className="font-reg sm:text-xs   text-2xs leading-[16px]  text-[#cddcfe] ">KDA</p>
       </div>
-      <div className="flex items-center  leading-[16px]">
-        <p className="font-thin sm:text-xs  text-2xs leading-[16px]">{totalMinionsKilled + neutralMinionsKilled} CS ({csPerMinute})</p>
+      <div className="flex items-center  leading-[16px] text-[#cddcfe]">
+        <p className="font-reg sm:text-xs  text-2xs leading-[16px]">{totalMinionsKilled + neutralMinionsKilled} CS ({csPerMinute})</p>
       </div>
       <div className="flex">
-        <p className="font-thin sm:text-xs text-2xs leading-[16px]">{visionScore} vision</p>
+        <p className="font-reg sm:text-xs text-2xs leading-[16px] text-[#cddcfe]">{visionScore} vision</p>
       </div>
     </div>
   );

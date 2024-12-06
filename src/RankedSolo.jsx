@@ -63,11 +63,11 @@ export function RankedSolo() {
                 <h2 className="text-xs sm:text-base font-semibold p-0">
                   {profile.soloduorank}
                 </h2>
-                <h2 className="text-2xs sm:text-base font-light ">{profile.soloduogames !== undefined && `${profile.soloduogames} games`}</h2>
+                <h2 className="text-2xs sm:text-base font-light text-neutral-200">{profile.soloduogames !== undefined && `${profile.soloduogames} games`}</h2>
               </div>
               <div className="flex justify-between w-full">
-                <h2 className="text-2xs sm:text-base font-light">{profile.soloduolp !== undefined && `${profile.soloduolp} LP`}</h2>
-                <h2 className="text-2xs sm:text-base font-light ">{profile.soloduowinrate !== undefined && `${profile.soloduowinrate}% winrate`}</h2>
+                <h2 className="text-2xs sm:text-base font-light text-neutral-200">{profile.soloduolp !== undefined && `${profile.soloduolp} LP`}</h2>
+                <h2 className="text-2xs sm:text-base font-light text-neutral-200">{profile.soloduowinrate !== undefined && `${profile.soloduowinrate}% winrate`}</h2>
               </div>
             </div>
           </div>

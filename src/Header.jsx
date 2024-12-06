@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useProfile } from "./ProfileContext.jsx";
 import { handleAccountSearch } from "./apiHandler.js"; // Import the new handler
 import logo from "./assets/logo.png";
@@ -6,11 +7,17 @@ import logo from "./assets/logo.png";
 export function Header() {
   const { setLoading, setProfile, setCache, setMatchHistory } = useProfile();
   const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     setLoading(true);
     try {
-      await handleAccountSearch(searchInput, { setProfile, setCache, setMatchHistory }); // Pass input and profile setters
+      const [name, tagline] = searchInput.includes("#")
+        ? searchInput.split("#")
+        : [searchInput, "na1"]; // Default tagline to "na1" if not provided
+
+      await handleAccountSearch(`${name}#${tagline}`, { setProfile, setCache, setMatchHistory }); // Fetch data
+      navigate(`/player/${name}-${tagline}`); // Navigate to new URL format
     } catch (error) {
       console.error("Error during search:", error);
     } finally {

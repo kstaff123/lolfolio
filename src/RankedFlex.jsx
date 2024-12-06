@@ -63,11 +63,11 @@ export function RankedFlex() {
                 <h2 className="text-xs sm:text-base font-semibold p-0">
                   {profile.flexrank}
                 </h2>
-                <h2 className="text-2xs sm:text-base font-light ">{profile.flexgames !== undefined && `${profile.flexgames} games`}</h2>
+                <h2 className="text-2xs sm:text-base font-light  text-neutral-200">{profile.flexgames !== undefined && `${profile.flexgames} games`}</h2>
               </div>
               <div className="flex justify-between w-full">
-                <h2 className="text-2xs sm:text-base font-light">{profile.flexlp !== undefined && `${profile.flexlp} LP`}</h2>
-                <h2 className="text-2xs sm:text-base font-light ">{profile.flexwinrate !== undefined && `${profile.flexwinrate}% winrate`}</h2>
+                <h2 className="text-2xs sm:text-base font-light text-neutral-200">{profile.flexlp !== undefined && `${profile.flexlp} LP`}</h2>
+                <h2 className="text-2xs sm:text-base font-light text-neutral-200 ">{profile.flexwinrate !== undefined && `${profile.flexwinrate}% winrate`}</h2>
               </div>
             </div>
           </div>

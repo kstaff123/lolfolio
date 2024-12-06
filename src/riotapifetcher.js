@@ -75,6 +75,16 @@ export const fetchMatchById = async (matchId) => {
   }
 };
 
+export const fetchChampMastery = async (PUUID) => {
+  try {
+    const response = await fetch(`${baseUrl}/api/champion-masteries/${PUUID}`);
+    if (!response.ok) throw new Error("Failed to fetch champion mastery data");
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching champion mastery data:", error);
+    return null;
+  }
+}
 
 
 
