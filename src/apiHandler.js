@@ -1,4 +1,4 @@
-import { fetchAccountData, FetchAccountLevel, fetchRankedData, fetchRankPercentile, fetchChampMastery } from "./riotapifetcher";
+import { fetchAccountData, FetchAccountLevel, fetchRankedData, fetchRankPercentile, fetchChampMastery, fetchChampList } from "./riotapifetcher";
 
 // Handler for account search
 export const handleAccountSearch = async (searchInput, { setProfile, setCache, setMatchHistory }) => {
@@ -37,6 +37,51 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
 
     const championMastery = await fetchChampMastery(accountData.puuid);
     console.log("Champion Mastery:", championMastery);
+
+
+  console.log("Champion Mastery:", championMastery);
+
+  const topChampId = championMastery[0]?.championId || null;
+  console.log("topChampId:", topChampId);
+
+  const champList = await fetchChampList();
+  console.log("champList:", champList);
+
+  function matchChampIdToName(champs) {
+    console.log("champs:", champs);
+    for (const champ in champs.data) {
+      const key = parseInt(champs.data[champ].key, 10);
+
+      if (key === topChampId) {
+        return champs.data[champ].id;
+      }
+    }
+  }
+  const bestChampion = matchChampIdToName(champList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const puuid = accountData.puuid;
 
@@ -95,6 +140,7 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
       rankpercentile: rankPercentile?.percentile || "Unknown",
       numberrank: rankPercentile?.rank || "Unknown",
       puuid: puuid,
+      bestChampion: bestChampion,
     };
 
     // Cache and update profile
@@ -136,3 +182,5 @@ export const handleAccountSearch = async (searchInput, { setProfile, setCache, s
 const getCache = (cacheKey) => {
   return null; // Replace with your actual caching logic
 };
+
+

@@ -85,6 +85,16 @@ export const fetchChampMastery = async (PUUID) => {
     return null;
   }
 }
+export const fetchChampList = async () => {
+  try {
+    const response = await fetch(`${baseUrl}/api/champlist`);
+    if (!response.ok) throw new Error("Failed to fetch champion list");
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching champion list:", error);
+    return null;
+  }
+}
 
 
 
