@@ -9,5 +9,12 @@ export default defineConfig({
     'process.env': {}, // Ensure process.env is defined for legacy compatibility
   },
   server: {
+    hmr: true,
+  },
+  resolve: {
+    alias: {
+      // Example: '@' -> 'src'
+      '@': '/src',
+    },
   },
 });
