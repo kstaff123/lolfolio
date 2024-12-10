@@ -12,7 +12,7 @@ export function Background() {
   return (
     <div className="relative">
       <div
-        className="absolute z-0 min-h-[700px] min-w-[36rem] bg-center left-[50%] translate-x-[-50%] translate-y-[15%] w-full "
+        className="absolute z-0 min-h-[700px] min-w-[36rem] bg-center left-[50%] translate-x-[-50%] translate-y-[0%] w-full "
         style={{
           backgroundImage: splashArtLink
             ? `linear-gradient(180deg,rgba(51,50,80,.28),#333250),linear-gradient(270deg,#333250 2.27%,rgba(51,50,80,0) 37.69%),radial-gradient(60.09% 84.73% at 100% 20.89%,rgba(51,50,80,0) 0,#333250 100%),
