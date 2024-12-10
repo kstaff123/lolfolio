@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchMatchHistory } from "./riotapifetcher"; // Fetch match IDs
 import { useProfile } from "./ProfileContext";
-import { Match, MatchNoPlayers } from "./Match";
+import { MatchContainer } from "./Match";
 
 export function MatchHistory() {
   const { profile } = useProfile();
@@ -88,17 +88,10 @@ export function MatchHistory() {
       </div>
 
       {/* Render matches */}
-      {matchIds.map((matchId, index) => (
-        <div key={index} className="max-[797px]:hidden">
-          <Match matchId={matchId} />
-        </div>
-      ))}
+{matchIds.map((matchId, index) => (
+  <MatchContainer key={index} matchId={matchId} />
+))}
 
-      {matchIds.map((matchId, index) => (
-        <div key={index} className="min-[797px]:hidden">
-          <MatchNoPlayers matchId={matchId} />
-        </div>
-      ))}
 
       {/* Load more button */}
       <div className="text-center">

@@ -13,45 +13,16 @@ import { useProfile } from "./ProfileContext";
 import queueData from ".//queuetypes.json";
 
 
-export function Match({ matchId }) {
-  const { profile } = useProfile();
-  const puuid = profile?.puuid;
+export const computeMatchData = async (matchId, puuid) => {
+  const data = await fetchMatchById(matchId);
 
-  const [matchData, setMatchData] = useState(null);
-  const [participantData, setParticipantData] = useState(null);
+  if (!data?.data) throw new Error("Match data not found");
 
-  useEffect(() => {
-    const loadMatchData = async () => {
-      
-      const data = await fetchMatchById(matchId);
-      setMatchData(data?.data || null); // Extract match data from response
+  const matchData = data.data;
+  const participantIndex = matchData.metadata.participants.indexOf(puuid);
+  if (participantIndex === -1) throw new Error(`PUUID ${puuid} not found in participants`);
 
-      if (data?.data) {
-        // Find participant index
-        const participantIndex = data.data.metadata.participants.indexOf(puuid);
-
-        if (participantIndex !== -1) {
-          // Extract participant data
-          const participantInfo = data.data.info.participants[participantIndex];
-          setParticipantData(participantInfo);
-          
-          if (participantIndex === -1) {
-            console.error(`PUUID ${puuid} not found in participants.`);
-            return <p>Participant not found in this match.</p>;
-          }
-          
-        } else {
-          console.error(`PUUID ${puuid} not found in participants.`);
-        }
-      }
-    };
-
-    loadMatchData();
-  }, [matchId, puuid]);
-
-  if (!matchData || !participantData) {
-    return <p>Loading match...</p>;
-  }
+  const participantData = matchData.info.participants[participantIndex];
 
   const { gameDuration } = matchData.info; // Overall match data
   const duration = `${Math.floor(gameDuration / 60)}:${gameDuration % 60}`;
@@ -182,10 +153,73 @@ const runeTreeIcons = [
     participantData.item5 || 0,
     participantData.item6 || 0,
   ];
-  
-  
-  
 
+  return {
+    gameMode,
+    gameDuration,
+    win,
+    date,
+    isRanked,
+    championName,
+    spell1,
+    spell2,
+    rune1Link,
+    rune2Link,
+    champLevel,
+    kills,
+    deaths,
+    assists,
+    totalMinionsKilled,
+    visionScore,
+    neutralMinionsKilled,
+    items,
+    participants,
+  };
+}
+
+
+
+
+export function MatchContainer({ matchId }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { profile } = useProfile();
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const matchData = await computeMatchData(matchId, profile?.puuid);
+        setData(matchData);
+      } catch (error) {
+        console.error("Error fetching match data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [matchId, profile?.puuid]);
+
+  if (loading) return <p>Loading match data...</p>;
+  if (!data) return <p>Match data not available.</p>;
+
+  // Use CSS to conditionally render the components based on screen size
+  return (
+    <>
+      <div className="max-[797px]:hidden">
+        <Match {...data} />
+      </div>
+      <div className="min-[797px]:hidden">
+        <MatchNoPlayers {...data} />
+      </div>
+    </>
+  );
+}
+
+
+
+
+export function Match({ gameMode, gameDuration, win, date, isRanked, championName, spell1, spell2, rune1Link, rune2Link, champLevel, kills, deaths, assists, totalMinionsKilled, visionScore, neutralMinionsKilled, items, participants}) {
   
 
   return (
@@ -199,14 +233,13 @@ const runeTreeIcons = [
   );
 }
 
-export function MatchNoPlayers() {
+export function MatchNoPlayers({ gameMode, gameDuration, win, date, isRanked, championName, spell1, spell2, rune1Link, rune2Link, champLevel, kills, deaths, assists, totalMinionsKilled, visionScore, neutralMinionsKilled, items, participants }) {
   return (
-    <div className="flex bg-[#323B7B] sm:mx-6 mx-2  my-2 items-center p-3 drop-shadow-md gap-2 sm:gap-4 text-center justify-between ">
-      <MatchType />
-      <MatchChamp />
-      <MatchKD />
-      <MatchItems />
-      <MatchPlayers />
+    <div className={`flex ${win ? 'bg-[#323B7B]' : 'bg-[#5C2A42]'} sm:mx-6 mx-2  my-2 items-center p-3 drop-shadow-md gap-2 sm:gap-4 text-center justify-between `}>
+      <MatchType gameMode={gameMode} gameDuration={gameDuration} win={win} date={date} isRanked={isRanked}/>
+      <MatchChamp championName={championName} spell1={spell1} spell2={spell2} rune1Link={rune1Link} rune2Link={rune2Link} champLevel={champLevel}/>
+      <MatchKD kills={kills} deaths={deaths} assists={assists} totalMinionsKilled={totalMinionsKilled} visionScore={visionScore} gameDuration={gameDuration} neutralMinionsKilled={neutralMinionsKilled}/>
+      <MatchItems items={items || []} win={win} />
     </div>
   );
 }
@@ -343,13 +376,13 @@ function MatchItems({ items = [], win }) {
       {gridItems.map((item, index) => (
         <div
           key={index}
-          className={`w-6 h-6  flex items-center justify-center rounded-md ${win ? 'bg-[#23366b]' : 'bg-[#53263e]'}`}
+          className={`sm:w-6 sm:h-6 w-4  flex items-center justify-center rounded-md ${win ? 'bg-[#23366b]' : 'bg-[#53263e]'}`}
         >
           {item !== 0 && (
             <img
               src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/item/${item}.png`}
               alt={`Item ${item}`}
-              className="w-6 h-6 rounded-md"
+              className="sm:w-6 sm:h-6 w-4 rounded-md"
             />
           )}
         </div>
@@ -359,12 +392,12 @@ function MatchItems({ items = [], win }) {
       
     </div>
     <div
-    className="w-6 h-6 bg-[#32274d] flex items-center justify-center rounded-md ml-1"
+    className="sm:w-6 sm:h-6 w-4 bg-[#32274d] flex items-center justify-center rounded-md ml-1 h-fit"
   >
     <img
       src={`https://ddragon.leagueoflegends.com/cdn/14.23.1/img/item/${wardItem}.png`}
       alt="Warding Totem"
-      className="w-6 h-6 rounded-md"
+      className="sm:w-6 sm:h-6 w-4 rounded-md"
     />
   </div>
   </div>
@@ -375,12 +408,44 @@ function MatchItems({ items = [], win }) {
 
 
 function MatchPlayers({ participants = [] }) {
+  const [isHidden, setIsHidden] = useState(false); // Visibility state
+
+  useEffect(() => {
+    // Function to handle screen size changes
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+
+      // Hide the element if screen width is between 1280px and 1600px
+      if (screenWidth >= 1280 && screenWidth < 1600) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add resize event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   // Ensure participants is an array
   const team1 = participants?.slice(0, 5) || [];
   const team2 = participants?.slice(5, 10) || [];
 
   return (
-    <div className="flex justify-center gap-5 flex-shrink-0">
+    <div
+      className="flex justify-center gap-5 flex-shrink-0 min-w-[212px]"
+      style={{
+        display: isHidden ? "none" : "flex", // Use `visibility` to control display
+      }}
+    >
       {/* Team 1 */}
       <div className="flex flex-col items-start gap-1">
         {team1.map((player, index) => (
@@ -390,7 +455,9 @@ function MatchPlayers({ participants = [] }) {
               alt={player?.championName || "Unknown"}
               className="w-5 h-5 rounded-md"
             />
-            <p className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16">{player?.summonerName || "Unknown Player"}</p>
+            <p className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16">
+              {player?.summonerName || "Unknown Player"}
+            </p>
           </div>
         ))}
       </div>
@@ -404,7 +471,9 @@ function MatchPlayers({ participants = [] }) {
               alt={player?.championName || "Unknown"}
               className="w-5 h-5 rounded-md"
             />
-            <p className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16">{player?.summonerName || "Unknown Player"}</p>
+            <p className="text-white font-light text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-16">
+              {player?.summonerName || "Unknown Player"}
+            </p>
           </div>
         ))}
       </div>
