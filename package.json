@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "start": "serve dist -l ${PORT:-3000} -c serve.json",
-    "lint": "eslint .",
-    "preview": "vite preview"
+  "dev": "vite --host",
+  "build": "vite build",
+  "start": "serve -s dist -l ${PORT:-3000}",
+  "lint": "eslint .",
+  "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.7.9",
