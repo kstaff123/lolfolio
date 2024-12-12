@@ -27,13 +27,13 @@ function HomePage() {
   };
 
   return (
-    <div className="bg-background-purple min-h-screen relative overflow-hidden">
+    <div className="bg-background-purple relative overflow-y-scroll overflow-x-hidden">
       <Background />
       <div className="relative z-[100]">
         <div>
           <Header />
         </div>
-        <div className="flex relative items-center justify-center top-32 text-white text-6xl font-thin flex-col ">
+        <div className="flex relative items-center justify-center top-32 text-white text-6xl font-thin flex-col  ">
           <img
             id="logo"
             src={logo}

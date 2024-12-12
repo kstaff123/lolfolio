@@ -10,8 +10,7 @@ export function Background() {
     : rivenSplashArt;
 
   return (
-    <div className="relative">
-      <div></div>
+    <div className="relative ">
       <div
         className="absolute z-0 min-h-[700px]  bg-center left-[50%] translate-x-[-50%] translate-y-[5%] w-[1200px] bg-no-repeat min-w-[300px]"
         style={{
