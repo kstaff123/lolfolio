@@ -39,6 +39,7 @@ function HomePage() {
             src={logo}
             className="w-[62px] max-[450px]:size-9 max-[450px]:mr-4 hover:cursor-pointer"
             alt="Olfolio Logo"
+            onClick={() => navigate("/")} // Navigate to homepage on logo click
           />
           <div className="bg-neutral-600 hover:bg-stone-400 focus:bg-stone-400 border-none outline-none w-1/4 min-w-[300px] h-12 my-4 rounded-3xl flex items-center group transition-all ease-in-out hover:placeholder-white ">
             <input

@@ -16,7 +16,11 @@ export function Header() {
         ? searchInput.split("#")
         : [searchInput, "na1"]; // Default tagline to "na1" if not provided
 
-      await handleAccountSearch(`${name}#${tagline}`, { setProfile, setCache, setMatchHistory }); // Fetch data
+      await handleAccountSearch(`${name}#${tagline}`, {
+        setProfile,
+        setCache,
+        setMatchHistory,
+      }); // Fetch data
       navigate(`/player/${name}-${tagline}`); // Navigate to new URL format
     } catch (error) {
       console.error("Error during search:", error);
@@ -33,8 +37,12 @@ export function Header() {
           src={logo}
           className="size-6 h-7 max-[450px]:size-9 max-[450px]:mr-4 hover:cursor-pointer"
           alt="Olfolio Logo"
+          onClick={() => navigate("/")} // Navigate to homepage on logo click
         />
-        <h2 className="text-3xl pr-3 max-[450px]:hidden hover:cursor-pointer">
+        <h2
+          className="text-3xl pr-3 max-[450px]:hidden hover:cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           olfolio
         </h2>
         <div className="bg-neutral-600 hover:bg-stone-400 focus:bg-stone-400 border-none outline-none w-[400px] min-w-[100px] h-10 my-4 rounded-3xl flex items-center group transition-all ease-in-out hover:placeholder-white ">
