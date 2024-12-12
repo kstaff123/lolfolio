@@ -218,7 +218,13 @@ export function MatchContainer({ matchId }) {
     loadData();
   }, [matchId, profile?.puuid]);
 
-  if (loading) return <p>Loading match data...</p>;
+  if (loading)
+    return (
+      <div
+        className={`flex bg-neutral-700
+        } sm:mx-6 mx-2 my-2 items-center p-3 shadow-md gap-2 sm:gap-4 text-center justify-between rounded-md h-48 `}
+      ></div>
+    );
   if (!data) return <p>Match data not available.</p>;
 
   // Use CSS to conditionally render the components based on screen size
@@ -259,7 +265,7 @@ export function Match({
     <div
       className={`flex ${
         win ? "bg-[#323B7B]" : "bg-[#5C2A42]"
-      } sm:mx-6 mx-2 my-2 items-center p-3 drop-shadow-xl gap-2 sm:gap-4 text-center justify-between`}
+      } sm:mx-6 mx-2 my-2 items-center p-3 shadow-md gap-2 sm:gap-4 text-center justify-between rounded-md `}
     >
       <MatchType
         gameMode={gameMode}
@@ -316,7 +322,7 @@ export function MatchNoPlayers({
     <div
       className={`flex ${
         win ? "bg-[#323B7B]" : "bg-[#5C2A42]"
-      } sm:mx-6 mx-2  my-2 items-center p-3 drop-shadow-md gap-2 sm:gap-4 text-center justify-between `}
+      } sm:mx-6 mx-2  my-2 items-center p-3 drop-shadow-lg gap-2 sm:gap-4 text-center justify-between rounded-lg `}
     >
       <MatchType
         gameMode={gameMode}
@@ -438,7 +444,7 @@ function MatchChamp({
           />
           <img
             src={rune1Link || "fallback_image_url"}
-            className="rounded-sm bg-neutral-700 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
+            className="rounded-sm bg-neutral-700/90 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
             alt="Conqueror"
           />
         </div>
@@ -450,7 +456,7 @@ function MatchChamp({
           />
           <img
             src={rune2Link}
-            className="rounded-sm bg-neutral-700 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
+            className="rounded-sm bg-neutral-700/90 sm:w-[26px] sm:h-[26px] w-[18px] h-[18px]"
             alt="Domination"
           />
         </div>

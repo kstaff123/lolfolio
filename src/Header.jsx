@@ -30,7 +30,7 @@ export function Header() {
   };
 
   return (
-    <header className="bg-neutral-700 flex h-20 font-montserrat w-full text-white font-extralight border-none drop-shadow-lg shadow-black">
+    <header className="bg-neutral-700/90 flex h-20 font-montserrat w-full text-white font-extralight border-none drop-shadow-2xl shadow-black">
       <div className="flex items-center mx-4 min-w-[300px]">
         <img
           id="logo"
