@@ -40,7 +40,7 @@ function HomePage() {
             className="w-[62px]  hover:cursor-pointer shadow-2xl"
             alt="Olfolio Logo"
           />
-          <div className="bg-neutral-600 hover:bg-stone-400 focus:bg-stone-400 border-none outline-none w-1/4 min-w-[300px] h-12 my-4 rounded-3xl flex items-center group transition-all ease-in-out hover:placeholder-white shadow-2xl">
+          <div className="bg-neutral-600 hover:bg-stone-400 focus:bg-stone-400 border-none outline-none w-1/4 min-w-fit h-12 my-4 rounded-3xl flex items-center group transition-all ease-in-out hover:placeholder-white shadow-2xl">
             <input
               placeholder="AccountName[#tag]"
               value={searchInput}
@@ -65,7 +65,7 @@ function HomePage() {
               />
             </svg>
           </div>
-          <div className="flex min-w-fit min-h-[400px] bg-neutral-600 rounded-2xl text-white text-center items-center flex-col p-4 w-1/4 shadow-2xl">
+          <div className="flex min-w-fit min-h-[400px] bg-neutral-600 rounded-2xl text-white text-center items-center flex-col m-4 p-2 w-1/4 shadow-2xl">
             <h3 className="text-4xl font-semibold mt-2">Documentation:</h3>
             <hr className="bg-white w-64 h-[2px]"></hr>
             <h4 className="mt-6 text-xl font-semibold">Frontend:</h4>
