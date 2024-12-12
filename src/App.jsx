@@ -27,7 +27,7 @@ function HomePage() {
   };
 
   return (
-    <div className="bg-background-purple relative overflow-y-scroll overflow-x-hidden">
+    <div className="bg-background-purple relative overflow-y-scroll overflow-x-hidden h-screen">
       <Background />
       <div className="relative z-[100]">
         <div>
