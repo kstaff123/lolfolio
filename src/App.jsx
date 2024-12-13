@@ -27,7 +27,7 @@ function HomePage() {
   };
 
   return (
-    <div className="bg-background-purple relative overflow-y-scroll overflow-x-hidden h-screen">
+    <div className="bg-background-purple relative overflow-y-scroll overflow-x-hidden h-screen no-scrollbar">
       <Background />
       <div className="relative z-[100]">
         <div>
@@ -65,11 +65,13 @@ function HomePage() {
               />
             </svg>
           </div>
-          <div className="flex min-w-fit min-h-[400px] bg-neutral-600 rounded-2xl text-white text-center items-center flex-col m-4 p-2 w-1/4 shadow-2xl">
-            <h3 className="text-4xl font-semibold mt-2">Documentation:</h3>
-            <hr className="bg-white w-64 h-[2px]"></hr>
-            <h4 className="mt-6 text-xl font-semibold">Frontend:</h4>
-            <hr className="bg-white w-24 h-[2px]"></hr>
+          <div className="flex min-w-fit min-h-[300px] bg-neutral-600 rounded-2xl text-white text-center items-center flex-col m-4 p-4 w-1/4 shadow-2xl">
+            <h3 className="sm:text-4xl text-2xl font-semibold mt-2 underline underline-offset-4">
+              Documentation:
+            </h3>
+            <h4 className="sm:mt-6 mt-2 text-lg font-semibold underline underline-offset-4">
+              Frontend:
+            </h4>
             <a
               className="mt-2 text-sm text-blue-300"
               href="https://github.com/kstaff123/lolfolio"
@@ -77,9 +79,10 @@ function HomePage() {
             >
               https://github.com/kstaff123/lolfolio
             </a>
-            <p className="mt-2 text-lg">React with Vite & TailwindCSS</p>
-            <h4 className="mt-6 text-xl font-semibold">Backend:</h4>
-            <hr className="bg-white w-24 h-[2px]"></hr>
+            <p className="mt-2 text-sm">React with Vite & TailwindCSS</p>
+            <h4 className="mt-6 text-lg font-semibold underline underline-offset-4">
+              Backend:
+            </h4>
             <a
               className="mt-2 text-sm text-blue-300"
               href="https://github.com/kstaff123/lolfolio_backend/"
@@ -87,11 +90,12 @@ function HomePage() {
             >
               https://github.com/kstaff123/lolfolio_backend/
             </a>
-            <p className="mt-2 text-lg">
+            <p className="mt-2 text-sm">
               Node, Express, & Redis deployed with Railway
             </p>
-            <h4 className="mt-6 text-xl font-semibold">Youtube Demo:</h4>
-            <hr className="bg-white w-36 h-[2px]"></hr>
+            <h4 className="mt-6 text-lg font-semibold underline underline-offset-4">
+              Youtube Demo:
+            </h4>
             <a
               className="mt-2 text-sm text-blue-300"
               href="https://www.youtube.com/watch?v=s3IdMOB_iow"
